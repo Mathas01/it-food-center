@@ -1,0 +1,38 @@
+nav {
+    display: flex; /* เพิ่ม display: flex เพื่อจัดการกับ layout */
+    flex-direction: column; /* ให้ nav เรียงแบบแนวตั้ง */
+    align-items: center; /* จัดให้กลางในแนวนอน */
+    color: white;
+    padding: 20px;
+    background-image:url('../../static/background/loading.jpg'); 
+    background-size: cover;
+    background-position: center;
+    height: 100px; 
+    margin: 0; 
+}
+.nav-user {
+    display: flex;
+    align-items: center; /* จัดแนวให้กลาง */
+    margin-left: auto; /* ช่วยให้ nav-user ชิดขวา */
+}
+.nav-user img {
+    width: 40px; /* กำหนดขนาดรูปภาพ */
+    height: 40px; /* กำหนดขนาดรูปภาพ */
+    border-radius: 50%; /* ทำให้รูปภาพเป็นวงกลม */
+    margin-left: 20px; /* ระยะห่างระหว่างข้อความกับรูปภาพ */
+}
+.search-bar {
+    display: flex;
+    justify-content: center; /* จัดให้ search-bar อยู่ตรงกลาง */
+    width: 100%; /* ทำให้ search-bar ขยายเต็มความกว้าง */
+    margin-top: 20px; /* ระยะห่างระหว่าง nav-user กับ search-bar */
+}
+.search-input {
+    border: none; /* ลบขอบ */
+    border-radius: 20px; /* ขอบมน */
+    padding: 10px;
+    width: 80%; /* กำหนดความกว้างของ textbox */
+}
+.user{
+    text-align: right;
+}

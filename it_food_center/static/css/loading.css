@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    margin: 0;
+    background-image:url('../../static/background/loading.jpg'); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh; 
+    margin: 0; 
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}

@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/c_orderStatus.css' %}" />
+    <title>Home</title>
+</head>
+<body>
+    {% include 'c_nav.html' %}
+    <main>
+        <div class="category">
+            <h1>{{restaurant.name}} : จัดการออเดอร์</h1>
+            <div class="category-shop">
+                {% for order in orders %}
+                {% if order.order_status == "F" or order.order_status == "R" %}
+                <div style="opacity: 0.4; box-shadow : 0px 0px 0px rgba(0, 0, 0, 0.3);;" class="category-shop-list">
+                    <h3 class="category-shop-list-name">{{ order.FoodItem.name }}</h3>
+                    <h4 class="category-shop-list-name">นักศึกษา : {{ order.student.first_name }} {{ order.student.last_name }}</h4>
+                    {% if order.FoodItem.name == "แกงเขียวหวาน" %}
+                    <img src="{% static '/restaurant/thai/keaw.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if order.FoodItem.name == "ข้าวผัดกระเพรา" %}
+                    <img src="{% static '/restaurant/thai/krapow.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if order.FoodItem.name == "ต้มยำกุ้ง" %}
+                    <img src="{% static '/restaurant/thai/tomyum.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if order.FoodItem.name == "ซูชิแซลมอน" %}
+                    <img src="{% static '/restaurant/japan/salmon.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if order.FoodItem.name == "ซูชิปลาหมึก" %}
+                    <img style="width: 180px;" src="{% static '/restaurant/japan/octo.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if order.FoodItem.name == "ซูชิรวม" %}
+                    <img src="{% static '/restaurant/japan/mix.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    <div class="category-shop-list-name">{{ order.description }}</div>
+                    {% if order.order_status == "W" %}
+                    <div style="color: #ccc;">สถานะ : {{ order.get_order_status_display }}</div>
+                    {% endif %}
+                    {% if order.order_status == "F" %}
+                    <div style="color: #000000;">สถานะ : {{ order.get_order_status_display }}</div>
+                    {% endif %}
+                    {% if order.order_status == "C" %}
+                    <div class="status">
+                    <div style="color: #f0ec20;">สถานะ : {{ order.get_order_status_display }}</div>
+                    </div>
+                    {% endif %}
+                    {% if order.order_status == "AC" %}
+                    <div style="color: #00ff37;">สถานะ : {{ order.get_order_status_display }}</div>
+                    {% endif %}
+                    <div style="color: #ff0000;">ราคา : {{ order.price|floatformat:2 }}</div>
+                    <div class="button-status">
+                        <button class="button-reject" disabled>ยกเลิก</button>
+                        <button disabled class="button-edit"disabled>แก้ใข</button>
+                        <button class="button-delete" onclick="confirmDelete({{ order.id }})">ลบ</button>
+                    </div>
+                </div>
+                {% else %}
+                <div class="category-shop-list">
+                    <h3 class="category-shop-list-name">{{ order.FoodItem.name }}</h3>
+                    <h4 class="category-shop-list-name">นักศึกษา : {{ order.student.first_name }} {{ order.student.last_name }}</h4>
+                    {% if order.FoodItem.name == "แกงเขียวหวาน" %}
+                    <img src="{% static '/restaurant/thai/keaw.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if order.FoodItem.name == "ข้าวผัดกระเพรา" %}
+                    <img src="{% static '/restaurant/thai/krapow.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if order.FoodItem.name == "ต้มยำกุ้ง" %}
+                    <img src="{% static '/restaurant/thai/tomyum.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if order.FoodItem.name == "ซูชิแซลมอน" %}
+                    <img src="{% static '/restaurant/japan/salmon.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if order.FoodItem.name == "ซูชิปลาหมึก" %}
+                    <img style="width: 180px;" src="{% static '/restaurant/japan/octo.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if order.FoodItem.name == "ซูชิรวม" %}
+                    <img src="{% static '/restaurant/japan/mix.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    <div class="category-shop-list-name">{{ order.description }}</div>
+                    {% if order.order_status == "W" %}
+                    <div style="color: #ccc;">สถานะ : {{ order.get_order_status_display }}</div>
+                    {% endif %}
+                    {% if order.order_status == "C" %}
+                    <div class="status">
+                    <div style="color: #f0ec20;">สถานะ : {{ order.get_order_status_display }}</div>
+                    </div>
+                    {% endif %}
+                    {% if order.order_status == "AC" %}
+                    <div style="color: #00ff37;">สถานะ : {{ order.get_order_status_display }}</div>
+                    {% endif %}
+                    <div style="color: #ff0000;">ราคา : {{ order.price|floatformat:2 }}</div>
+                    <div class="button-status">
+                        <button class="button-reject" onclick="confirmCancel({{ order.id }})">ยกเลิก</button>
+                        <button class="button-edit" onclick="window.location.href='edit/{{ order.id }}'">แก้ไข</button>
+                        <button class="button-delete" onclick="confirmDelete({{ order.id }})">ลบ</button>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <button class="add_order" onclick="window.location.href='{% url 'order_add' %}'">เพิ่มออเดอร์</button>
+    </main>
+    <script>
+        function confirmCancel(orderID) {
+            if (confirm('ยกเลิกออเดอร์')) {
+                window.location.href = '../c_orderStatus/cancel/' + orderID;
+            }
+        }
+        function confirmDelete(orderID) {
+            if (confirm('ลบออเดอร์')) {
+                window.location.href = '../c_orderStatus/delete/' + orderID;
+            }
+        }
+    </script>
+</body>
+</html>

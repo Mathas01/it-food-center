@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>รายการสั่งซื้อ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: url('../../static/background/loading.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .order-container {
+            background-color: #ffffff;
+            width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .order-title {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        .menu-options {
+            margin-bottom: 20px;
+        }
+
+        .menu-options label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .menu-options input {
+            margin-right: 10px;
+        }
+
+        .extra-options {
+            margin-bottom: 20px;
+        }
+
+        .extra-options input {
+            margin-right: 10px;
+        }
+
+        .note-container {
+            margin-bottom: 20px;
+        }
+
+        .note-container textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+            font-size: 16px;
+        }
+
+        .total-price {
+            font-size: 20px;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .order-button {
+            background-color: #283988;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .order-button:hover {
+            background-color: #b6778c;
+        }
+
+        .order-form {
+            width: 100%;
+        }
+
+        .category-shop-list {
+            display: flex;
+            /* ใช้ flexbox */
+            align-items: center;
+            /* จัดแนวแนวตั้ง */
+            width: 93%;
+            height: 50px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+            margin-right: 20px;
+            /* เพิ่มระยะห่างระหว่างรายการ */
+            margin-bottom: 10px;
+        }
+
+        .category-shop-list img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .category-shop-list-name {
+            margin-left: 20px;
+        }
+
+        .category-shop-list-status {
+            margin-left: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post" class="order-container">
+        <a href="{% url 'home'%}" class="back-button">กลับ</a>
+        <div class="category">
+            <h1>Status :</h1>
+            <div class="category-shop">
+                {% if orders %}
+                {% for order in orders %}
+                {% if order.order_status == "F" %}
+                {% else %}
+                {% with foodItem=order.FoodItem %}
+                <div class="category-shop-list">
+                    {% if foodItem.name == "แกงเขียวหวาน" %}
+                    <img src="{% static '/restaurant/thai/keaw.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if foodItem.name == "ข้าวผัดกระเพรา" %}
+                    <img src="{% static '/restaurant/thai/krapow.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if foodItem.name == "ต้มยำกุ้ง" %}
+                    <img src="{% static '/restaurant/thai/tomyum.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if foodItem.name == "ซูชิแซลมอน" %}
+                    <img src="{% static '/restaurant/japan/salmon.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if foodItem.name == "ซูชิปลาหมึก" %}
+                    <img style="width: 80px;" src="{% static '/restaurant/japan/octo.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if foodItem.name == "ซูชิรวม" %}
+                    <img src="{% static '/restaurant/japan/mix.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    <div class="category-shop-list-name">{{ order.FoodItem.name }}</div>
+                    {% if order.order_status == "W" %}
+                    <div style="color: #ccc;" class="category-shop-list-status">สถานะ : {{ order.get_order_status_display }}</div>
+                    {% endif %}
+                    {% if order.order_status == "C" %}
+                    <div style="color: #f0ec20;" class="category-shop-list-status">สถานะ : {{ order.get_order_status_display }}</div>
+                    {% endif %}
+                    {% if order.order_status == "AC" %}
+                    <div style="color: #00ff37;" class="category-shop-list-status">สถานะ : {{ order.get_order_status_display }}</div>
+                    {% endif %}
+                </div>
+                {% endwith %}
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <div class="no-orders-message">ยังไม่มีออเดอร์</div>
+                {% endif %}
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

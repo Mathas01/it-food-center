@@ -1,0 +1,34 @@
+body{
+    background-image:url('../../static/background/home.jpg'); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh; 
+    margin: 0;
+}
+main{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img{
+    width: 120px;
+}
+
+.category-shop {
+    display: flex;
+    flex-wrap: nowrap; /* เปลี่ยนเป็น nowrap เพื่อไม่ให้ wrap */
+    flex-direction: row; /* ทำให้เรียงแนวนอน */
+}
+
+.category-shop-list {
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    margin-right: 20px; /* เพิ่มระยะห่างระหว่างรายการ */
+}

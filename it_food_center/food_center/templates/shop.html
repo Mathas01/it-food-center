@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/home.css' %}" />
+    <title>Home</title>
+</head>
+<body>
+    {% include 'nav.html' %}
+    <main>
+        <div class="category">
+            <h1>{{restaurants.name}}</h1>
+            <div class="category-shop">
+                {% for foodItem in foodItems %}
+                <div class="category-shop-list"onclick="window.location.href='{% url 'order' foodItem.id %}'">
+                    {% if foodItem.name == "แกงเขียวหวาน" %}
+                    <img src="{% static '/restaurant/thai/keaw.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if foodItem.name == "ข้าวผัดกระเพรา" %}
+                    <img src="{% static '/restaurant/thai/krapow.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if foodItem.name == "ต้มยำกุ้ง" %}
+                    <img src="{% static '/restaurant/thai/tomyum.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if foodItem.name == "ซูชิแซลมอน" %}
+                    <img src="{% static '/restaurant/japan/salmon.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if foodItem.name == "ซูชิปลาหมึก" %}
+                    <img style="width: 180px;" src="{% static '/restaurant/japan/octo.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if foodItem.name == "ซูชิรวม" %}
+                    <img src="{% static '/restaurant/japan/mix.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    <div class="category-shop-list-name">{{ foodItem.name }}</div>
+                    <div class="category-shop-list-price">{{ foodItem.price}}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>
+

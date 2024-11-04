@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>เพิ่มคำสั่งซื้อ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            height: 100vh; 
+            margin: 0; 
+        }
+
+        .order-container {
+            background-color: #ffffff;
+            width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .order-title {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .menu-options {
+            margin-bottom: 20px;
+        }
+
+        .menu-options label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .note-container {
+            margin-bottom: 20px;
+        }
+
+        .note-container textarea {
+            width: 90%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+            font-size: 16px;
+        }
+
+        .order-button {
+            background-color: #283988;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .order-button:hover {
+            background-color: #b6778c;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" class="order-container">
+        {% csrf_token %}
+        <a href="{% url 'c_orderStatus' %}" class="back-button">กลับ</a>
+        <div class="order-title">เพิ่มคำสั่งซื้อ</div>
+    
+        <div class="menu-options">
+            <label>เลือกเมนู:</label>
+            {{ form.food_item }}
+        </div>
+
+        <div class="menu-options">
+            <label>นักศึกษา:</label>
+            {{ form.student }}
+        </div>
+    
+        <div class="menu-options">
+            <label>ขนาด:</label>
+            {% for size in form.size %}
+                <label>
+                    {{ size.tag }} {{ size.choice_label }}
+                </label>
+            {% endfor %}
+        </div>
+
+        <div class="note-container">
+            <label>เพิ่มเติม:</label>
+            {{ form.description }}
+        </div>
+
+        <div class="note-container">
+            <label>จำนวน:</label>
+            {{ form.quantity }}
+        </div>
+
+        <button type="submit" class="order-button">บันทึก</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+</head>
+<body>
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <img src="{% static 'logo-icon/icon_png.png' %}" alt="My image">
+        {{ form.username.errors }}
+        <div class="form-group">
+            <label for="username">ชื่อผู้ใช้ :</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        {{ form.password.errors }}
+        <div class="form-group">
+            <label for="password">รหัสผ่าน :</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-submit">
+            <button class="login"type="submit">เข้าสู่ระบบ</button>
+            <br>
+            <br>
+            <a class="register" href="{% url 'register' %}" >สมัครใช้งาน</a>
+        </div>
+        <br>
+        <br>
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <p class="text-danger">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {{ form.non_field_errors }}
+    </form>
+</body>
+</html>

@@ -1,0 +1,94 @@
+body{
+    background-image:url('../../static/background/home.jpg'); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh; 
+    margin: 0;
+}
+main{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img{
+    width: 120px;
+}
+
+.category-shop {
+    display: flex;
+    flex-wrap: nowrap; /* เปลี่ยนเป็น nowrap เพื่อไม่ให้ wrap */
+    flex-direction: row; /* ทำให้เรียงแนวนอน */
+}
+
+.category-shop-list {
+
+    width: 250px;
+    height: 350px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    margin-right: 20px; /* เพิ่มระยะห่างระหว่างรายการ */
+}
+
+.category-shop-list-add {
+    width: 120px;
+    height: 120px;
+    margin-top: 90px;
+    background-color: rgb(231, 231, 231);
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.button-edit{
+    background-color: #283988;
+    color: white;
+    border: 0;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.add_order { 
+    background-color: #338828;
+    color: white;
+    border: 0;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.button-reject{
+    background-color: #d1d1d1;
+    color: rgb(0, 0, 0);
+    border: 0;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.button-delete{
+    background-color: #882828;
+    color: white;
+    border: 0;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.button-status{
+    margin-top: auto;
+}
+
+.category-shop-list  *{
+    margin-top: 5px; 
+}
+

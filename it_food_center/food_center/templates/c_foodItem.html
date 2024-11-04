@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/c_orderStatus.css' %}" />
+    <title>Home</title>
+</head>
+<body>
+    {% include 'c_nav.html' %}
+    <main>
+        <div class="category">
+            <h1>{{restaurant.name}} : จัดการเมนู</h1>
+            <div class="category-shop">
+                {% for food_item in food_items %}
+                <div class="category-shop-list">
+                    <h3 class="category-shop-list-name">{{ food_item.name }}</h3>
+                    {% if food_item.name == "แกงเขียวหวาน" %}
+                    <img src="{% static '/restaurant/thai/keaw.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if food_item.name == "ข้าวผัดกระเพรา" %}
+                    <img src="{% static '/restaurant/thai/krapow.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if food_item.name == "ต้มยำกุ้ง" %}
+                    <img src="{% static '/restaurant/thai/tomyum.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if food_item.name == "ซูชิแซลมอน" %}
+                    <img src="{% static '/restaurant/japan/salmon.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if food_item.name == "ซูชิปลาหมึก" %}
+                    <img style="width: 180px;" src="{% static '/restaurant/japan/octo.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    {% if food_item.name == "ซูชิรวม" %}
+                    <img src="{% static '/restaurant/japan/mix.png' %}" alt="shop-list-img">
+                    {% endif %}
+                    <div class="category-shop-list-name">ชื่อเมนู : {{ food_item.name }}</div>
+                    <div class="category-shop-list-name">ราคา : {{ food_item.price }}</div>
+                    <div class="category-shop-list-name">คำอธิบาย : {{ food_item.description }}</div>
+                    <div class="category-shop-list-name">พร้อมเสิร์ฟ : {{ food_item.quantity }}</div>
+                    <div class="button-status">
+                        <button class="button-edit" onclick="window.location.href='edit/{{ food_item.id }}'">แก้ไข</button>
+                        <button class="button-delete" onclick="confirmDelete({{ food_item.id }})">ลบ</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    <script>
+        function confirmDelete(fooditem_id) {
+            if (confirm('ลบเมนู')) {
+                window.location.href = '../c_fooditem/delete/' + fooditem_id;
+            }
+        }
+    </script>
+</body>
+</html>

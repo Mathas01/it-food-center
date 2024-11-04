@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/home.css' %}" />
+    <title>Home</title>
+</head>
+<body>
+    {% include 'nav.html' %}
+    <main>
+        <div class="category">
+            <h1>ร้านอาหารไทย</h1>
+            <div class="category-shop">
+                {% for restaurant in thai %}
+                <div class="category-shop-list"onclick="window.location.href='{% url 'shop' restaurant.id %}'">
+                    <div class="category-shop-list-name">{{ restaurant.name }}</div>
+                    <div class="category-shop-list-name">{{ restaurant.description }}</div>
+                {% if restaurant.name == "ร้านอาหารไทยแท้"%}
+                    <img src="{% static '/restaurant/thai.png' %}" alt="shop-list-img">
+                {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="category">
+            <h1>ร้านอาหารญี่ปุ่น</h1>
+            <div class="category-shop">
+                {% for restaurant in japan %}
+                <div class="category-shop-list"onclick="window.location.href='{% url 'shop' restaurant.id %}'">
+                    <div class="category-shop-list-name">{{ restaurant.name }}</div>
+                    <div class="category-shop-list-name">{{ restaurant.description }}</div>
+                {% if restaurant.name == "ร้านซูชิสดใหม่"%}
+                    <img src="{% static '/restaurant/japan.png' %}" alt="shop-list-img">
+                {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>

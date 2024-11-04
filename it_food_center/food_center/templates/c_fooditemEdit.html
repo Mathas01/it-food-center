@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>แก้ไขรายการสั่งซื้อ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: url('{% static "background/loading.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            height: 100vh; 
+            margin: 0; 
+        }
+
+        .order-container {
+            background-color: #ffffff;
+            width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .order-title {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        .menu-options {
+            margin-bottom: 20px;
+        }
+
+        .menu-options label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .note-container {
+            margin-bottom: 20px;
+        }
+
+        .note-container textarea {
+            width: 90%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+            font-size: 16px;
+        }
+
+        .order-button {
+            background-color: #283988;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .order-button:hover {
+            background-color: #b6778c;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" class="order-container">
+        {% csrf_token %}
+        <a href="{% url 'c_fooditem' %}" class="back-button">กลับ</a>
+        <div class="order-title">เมนู :{{ food_item.name }}</div>
+        <div class="image-container">
+            {% if food_item.name == "แกงเขียวหวาน" %}
+                <img src="{% static '/restaurant/thai/keaw.png' %}" alt="shop-list-img">
+            {% elif food_item.name == "ข้าวผัดกระเพรา" %}
+                <img src="{% static '/restaurant/thai/krapow.png' %}" alt="shop-list-img">
+            {% elif food_item.name == "ต้มยำกุ้ง" %}
+                <img src="{% static '/restaurant/thai/tomyum.png' %}" alt="shop-list-img">
+            {% elif food_item.name == "ซูชิแซลมอน" %}
+                <img src="{% static '/restaurant/japan/salmon.png' %}" alt="shop-list-img">
+            {% elif food_item.name == "ซูชิปลาหมึก" %}
+                <img style="width: 180px;" src="{% static '/restaurant/japan/octo.png' %}" alt="shop-list-img">
+            {% elif food_item.name == "ซูชิรวม" %}
+                <img src="{% static '/restaurant/japan/mix.png' %}" alt="shop-list-img">
+            {% endif %}
+        </div>
+    
+        </div>
+    
+        <div class="note-container">
+            <label>ชื่อ : </label>
+            {{ form.name }}
+        </div>
+
+        <div class="note-container">
+            <label>คำอธิบาย :</label>
+            {{ form.description }}
+        </div>
+
+        <div class="note-container">
+            <label>จำนวนคงเหลือ :</label>
+            {{ form.quantity }}
+        </div>
+
+        <div class="note-container">
+            <label>ราคา :</label>
+            {{ form.price }}
+        </div>
+        
+        <button type="submit" class="order-button">บันทึก</button>
+    </form>
+    
+</body>
+</html>

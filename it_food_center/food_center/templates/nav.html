@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        nav {
+            display: flex; /* เพิ่ม display: flex เพื่อจัดการกับ layout */
+            color: white;
+            padding: 20px;
+            background-image: url('{% static "background/loading.jpg" %}'); 
+            background-size: cover;
+            background-position: center;
+            height: 70px; 
+            margin: 0; 
+            align-items: center; /* จัดให้แนวตั้งกลาง */
+        }
+        .nav-user {
+            display: flex;
+            align-items: center; /* จัดแนวให้กลาง */
+            margin-left: auto; /* ช่วยให้ nav-user ชิดขวา */
+        }
+        .nav-user img {
+            width: 40px; /* กำหนดขนาดรูปภาพ */
+            height: 40px; /* กำหนดขนาดรูปภาพ */
+            border-radius: 50%; /* ทำให้รูปภาพเป็นวงกลม */
+            margin-left: 20px; /* ระยะห่างระหว่างข้อความกับรูปภาพ */
+        }
+        .nav-warp {
+            display: flex; /* ใช้ flexbox เพื่อจัดการลิงก์ */
+            gap: 20px; /* ระยะห่างระหว่างลิงก์ */
+            margin-left: 30px;
+        }
+        .nav-warp a {
+            color: white; /* สีลิงก์ */
+            text-decoration: none; /* ไม่มีขีดเส้นใต้ */
+            align-self: center; /* จัดแนวกลางในแนวตั้ง */
+        }
+        .search-bar {
+            display: flex;
+            justify-content: center; /* จัดให้ search-bar อยู่ตรงกลาง */
+            width: 100%; /* ทำให้ search-bar ขยายเต็มความกว้าง */
+            margin-top: 20px; /* ระยะห่างระหว่าง nav-user กับ search-bar */
+        }
+        .search-input {
+            border: none; /* ลบขอบ */
+            border-radius: 20px; /* ขอบมน */
+            padding: 10px;
+            width: 80%; /* กำหนดความกว้างของ textbox */
+        }
+        .user {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-logo">
+                <img style="width: 80px;" src="{% static '/logo-icon/icon_png.png' %}" alt="logo" href="{% url 'home' %}">
+            </div>
+            <div class="nav-warp">
+                <a href="{% url 'home' %}">หน้าหลัก</a>
+                <a href="{% url 'status' %}">ดูสถานะอาหาร</a>
+                <a href="{% url 'logout' %}">ล็อกเอาท์</a>
+            </div>
+            <div class="nav-user">
+                <div class="user">
+                    <strong>{{ student.first_name }} {{ student.last_name }}</strong><br>
+                    <span>{{student.gmail}}</span>
+                </div>
+                <img src="{% static '/logo-icon/userIcon.png' %}" alt="User Image"> <!-- ใส่ path รูปภาพของคุณ -->
+            </div>
+        </nav>
+    </header>
+</body>
+</html>
